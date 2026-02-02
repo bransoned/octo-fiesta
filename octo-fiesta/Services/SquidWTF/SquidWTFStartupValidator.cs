@@ -37,10 +37,10 @@ public class SquidWTFStartupValidator : BaseStartupValidator
 
         WriteStatus("SquidWTF Quality", quality, ConsoleColor.Cyan);
 
-        // Test connectivity to triton.squid.wtf
+        // Test connectivity to https://tidal-api.binimum.org
         try
         {
-            var response = await _httpClient.GetAsync("https://triton.squid.wtf/", cancellationToken);
+            var response = await _httpClient.GetAsync("https://tidal-api.binimum.org/", cancellationToken);
 
             if (response.IsSuccessStatusCode)
             {
@@ -84,7 +84,7 @@ public class SquidWTFStartupValidator : BaseStartupValidator
         try
         {
             // Test search with a simple query
-            var searchUrl = "https://triton.squid.wtf/search/?s=Taylor%20Swift";
+            var searchUrl = "https://tidal-api.binimum.org/search/?s=Taylor%20Swift";
             var searchResponse = await _httpClient.GetAsync(searchUrl, cancellationToken);
 
             if (searchResponse.IsSuccessStatusCode)
