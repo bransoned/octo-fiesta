@@ -53,7 +53,7 @@ public class SquidWTFDownloadService : BaseDownloadService
         try
         {
             // Test connectivity to triton.squid.wtf
-            var response = await _httpClient.GetAsync("https://triton.squid.wtf/");
+            var response = await _httpClient.GetAsync("https://tidal-api.binimum.org/");
 			Console.WriteLine($"Response code from is available async: {response.IsSuccessStatusCode}");
             return response.IsSuccessStatusCode;
         }
@@ -149,7 +149,7 @@ public class SquidWTFDownloadService : BaseDownloadService
             };
             
             // Use the triton.squid.wtf endpoint to get track download info
-            var url = $"https://triton.squid.wtf/track/?id={trackId}&quality={quality}";
+            var url = $"https://tidal-api.binimum.org/track/?id={trackId}&quality={quality}";
 
             Console.WriteLine($"%%%%%%%%%%%%%%%%%%% URL For downloads??: {url}");
 
@@ -161,7 +161,7 @@ public class SquidWTFDownloadService : BaseDownloadService
             
             if (!doc.RootElement.TryGetProperty("data", out var data))
             {
-                throw new Exception("Invalid response from triton.squid.wtf");
+                throw new Exception("Invalid response from https://tidal-api.binimum.org");
             }
             
             // Get the manifest (base64 encoded JSON containing the actual CDN URL)
