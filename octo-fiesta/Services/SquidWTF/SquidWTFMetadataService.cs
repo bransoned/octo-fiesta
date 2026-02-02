@@ -20,7 +20,7 @@ public class SquidWTFMetadataService : IMusicMetadataService
 	private readonly HttpClient _httpClient;
     private readonly SubsonicSettings _settings;
 	private readonly ILogger<SquidWTFMetadataService> _logger;
-    private const string BaseUrl = "https://triton.squid.wtf";
+    private const string BaseUrl = "https://tidal-api.binimum.org";
 
 	public SquidWTFMetadataService(IHttpClientFactory httpClientFactory, 
 	IOptions<SubsonicSettings> settings,
