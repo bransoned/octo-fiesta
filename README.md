@@ -1,3 +1,89 @@
+# DISCLAIMER:
+Upstream Octo-Fiesta now supports SquidWTF and other [Hifi-API](https://github.com/binimum/hifi-api) instances as a source. You can find a list of these instances [here](https://github.com/monochrome-music/monochrome/blob/main/INSTANCES.md)
+
+Due to this, I will no longer be maintaining this fork as it is now redundant and not needed. If you are content with the current functionality of Octo-Fiestarr, feel free to continue using this project, but if you would like future updates, please move upstream. To help with this move, I have provided my `docker-compose.yaml` and relevant part of my `.env` file to help in this transition:
+
+```docker
+  octo-fiesta:
+    image: ghcr.io/v1ck3s/octo-fiesta:latest
+    container_name: octo-fiesta
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:5275:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - Subsonic__Url=${SUBSONIC_URL:-http://localhost:4533}
+      - Subsonic__ExplicitFilter=${EXPLICIT_FILTER:-ExplicitOnly}
+      - Subsonic__DownloadMode=${DOWNLOAD_MODE:-Track}
+      - Subsonic__MusicService=${MUSIC_SERVICE}
+      - Subsonic__EnableExternalPlaylists=${ENABLE_EXTERNAL_PLAYLISTS}
+      - Subsonic__PlaylistsDirectory=${PLAYLISTS_DIRECTORY}
+      - Subsonic__StorageMode=${STORAGE_MODE}
+      - Subsonic__CacheDurationHours=${CACHE_DURATION_HOURS}
+      - Library__DownloadPath=/app/downloads
+      - SquidWTF__Source=${SQUIDWTF_SOURCE}
+      - SquidWTF__Quality=${SQUIDWTF_QUALITY}
+    volumes:
+      - ${DOWNLOAD_PATH:-./downloads}:/app/downloads
+```
+
+```env
+## For octo-fiesta
+# Navidrome/Subsonic server URL
+SUBSONIC_URL=http://navidrome:4533
+
+# Path where downloaded songs will be stored on the host (only applies if STORAGE_MODE=Permanent)
+# Make sure Navidrome can reach this path
+DOWNLOAD_PATH=./downloads
+
+# Music service to use: SquidWTF, Deezer, or Qobuz (default: SquidWTF)
+MUSIC_SERVICE=SquidWTF
+
+SQUIDWTF_SOURCE=Tidal
+
+# ===== SquidWTF CONFIGURATION =====
+# Different quality options for SquidWTF. Only FLAC supported right now
+SQUIDWTF_QUALITY=HI_RES_LOSSLESS
+
+# ===== GENERAL SETTINGS =====
+# External playlists support (optional, default: true)
+# When enabled, allows searching and downloading playlists from Deezer/Qobuz
+# Starring a playlist triggers automatic download of all tracks and creates an M3U file
+ENABLE_EXTERNAL_PLAYLISTS=true
+
+# Playlists directory name (optional, default: playlists)
+# M3U playlist files will be created in {DOWNLOAD_PATH}/{PLAYLISTS_DIRECTORY}/
+PLAYLISTS_DIRECTORY=playlists
+
+# Explicit content filter (optional, default: All)
+# - All: Show all tracks (no filtering)
+# - ExplicitOnly: Exclude clean/edited versions, keep original explicit content
+# - CleanOnly: Only show clean content (naturally clean or edited versions)
+# Note: This only works with Deezer, Qobuz doesn't expose explicit content flags
+EXPLICIT_FILTER=All
+
+# Download mode (optional, default: Track)
+# - Track: Download only the played track
+# - Album: When playing a track, download the entire album in background
+#          The played track is downloaded first, remaining tracks are queued
+DOWNLOAD_MODE=Track
+
+# Storage mode (optional, default: Permanent)
+# - Permanent: Files are saved to the library permanently and registered in Navidrome
+# - Cache: Files are stored in /tmp and automatically cleaned up after CACHE_DURATION_HOURS
+#          Not registered in Navidrome, ideal for streaming without library bloat
+#          Note: On Linux/Docker, you can customize cache location by setting TMPDIR environment variable
+STORAGE_MODE=Permanent
+
+# Cache duration in hours (optional, default: 1)
+# Files older than this duration will be automatically deleted when STORAGE_MODE=Cache
+# Based on last access time (updated each time the file is streamed)
+# Cache location: /tmp/octo-fiesta-cache (or $TMPDIR/octo-fiesta-cache if TMPDIR is set)
+CACHE_DURATION_HOURS=1
+```
+
+Feel free to edit the `.env` file to your liking/preferences, but this should serve as a solid guide to transfer from Octo-Fiestarr to upstream.
+
 # Octo-Fiestarr
 
 A Subsonic API proxy server that transparently integrates multiple music streaming providers as sources. When a song is not available in your local Navidrome library, it is automatically fetched from your configured provider, downloaded, and served to your Subsonic-compatible client. The downloaded song is then added to your library, making it available locally for future listens.
