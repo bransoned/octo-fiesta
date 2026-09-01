@@ -23,7 +23,7 @@ public class SquidWTFDownloadService : BaseDownloadService
     private readonly SquidWTFCaptchaSolver _captchaSolver;
     
     // Static Qobuz API endpoint
-    private const string QobuzBaseUrl = "https://qobuz.squid.wtf";
+    private const string QobuzBaseUrl = "https://arcod.xyz";
 
     // Required headers
     private const string QobuzCountryHeader = "Token-Country";

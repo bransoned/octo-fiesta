@@ -19,7 +19,7 @@ public class SquidWTFInstanceManager
     private const string FallbackInstance = "https://monochrome-api.samidy.com/";
 
     // No failover for Qobuz — only one public endpoint exists.
-    private const string QobuzBaseUrl = "https://qobuz.squid.wtf";
+    private const string QobuzBaseUrl = "https://arcod.xyz";
 
     private List<string>? _tidalInstances;
     private int _currentInstanceIndex;
