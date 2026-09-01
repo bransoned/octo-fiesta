@@ -181,7 +181,7 @@ public class SquidWTFStartupValidator : BaseStartupValidator
                     var json = await searchResponse.Content.ReadAsStringAsync(cancellationToken);
                     var doc = JsonDocument.Parse(json);
                     
-                    if (data.TryGetProperty("items", out var items))
+                    if (doc.RootElement.TryGetProperty("items", out var items))
                     {
                         var itemCount = items.GetArrayLength();
                         WriteStatus("Search Functionality", "WORKING", ConsoleColor.Green);
