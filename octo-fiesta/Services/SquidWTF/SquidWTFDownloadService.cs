@@ -252,7 +252,7 @@ public class SquidWTFDownloadService : BaseDownloadService
     {
         var response = await _instanceManager.SendWithFailoverAsync(baseUrl =>
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, $"{baseUrl}/track/?id={trackId}&quality={quality}");
+            var request = new HttpRequestMessage(HttpMethod.Get, $"{baseUrl}/manifests?id={trackId}&quality={quality}");
             request.Headers.Add(TidalClientHeader, TidalClientValue);
             return request;
         }, cancellationToken);

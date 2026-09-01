@@ -539,10 +539,10 @@ public class SquidWTFMetadataService : IMusicMetadataService
         if (response == null) return null;
  
         return JsonSerializer.Deserialize<TidalTrackInfoResponse>(response);      
-#        var trackInfoWrapper = JsonSerializer.Deserialize<TidalTrackInfoResponse>(response);
-#        if (trackInfoWrapper?.Data == null) return null;
+//        var trackInfoWrapper = JsonSerializer.Deserialize<TidalTrackInfoResponse>(response);
+//        if (trackInfoWrapper?.Data == null) return null;
         
-#        return MapTidalTrackInfoToSong(trackInfoWrapper.Data);
+//        return MapTidalTrackInfoToSong(trackInfoWrapper.Data);
     }
 
     private async Task<Album?> GetAlbumTidalAsync(string albumId)
