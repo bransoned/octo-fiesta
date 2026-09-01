@@ -539,7 +539,7 @@ public class SquidWTFMetadataService : IMusicMetadataService
         if (response == null) return null;
  
         var trackInfoWrapper = JsonSerializer.Deserialize<TidalTrackInfoResponse>(response);
-        if (trackInfoWrapper?.Data == null) return null;
+        if (trackInfoWrapper == null) return null;
         
         return MapTidalTrackInfoToSong(trackInfoWrapper);
     }
