@@ -76,7 +76,7 @@ public class SquidWTFDownloadService : BaseDownloadService
             {
                 var response = await _instanceManager.SendWithFailoverAsync(baseUrl =>
                 {
-                    var request = new HttpRequestMessage(HttpMethod.Get, $"{baseUrl}/search/?s=test");
+                    var request = new HttpRequestMessage(HttpMethod.Get, $"{baseUrl}/tracks?q=test");
                     request.Headers.Add(TidalClientHeader, TidalClientValue);
                     return request;
                 });

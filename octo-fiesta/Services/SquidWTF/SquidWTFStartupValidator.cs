@@ -122,7 +122,7 @@ public class SquidWTFStartupValidator : BaseStartupValidator
             // Use instance manager to test with failover
             var response = await _instanceManager.SendWithFailoverAsync(baseUrl =>
             {
-                return new HttpRequestMessage(HttpMethod.Get, $"{baseUrl}/search/?s=test");
+                return new HttpRequestMessage(HttpMethod.Get, $"{baseUrl}/tracks?q=test");
             }, cancellationToken);
 
             var currentInstance = _instanceManager.GetCurrentInstance();
@@ -173,7 +173,7 @@ public class SquidWTFStartupValidator : BaseStartupValidator
             {
                 var searchResponse = await _instanceManager.SendWithFailoverAsync(baseUrl =>
                 {
-                    return new HttpRequestMessage(HttpMethod.Get, $"{baseUrl}/search/?s=Taylor%20Swift");
+                    return new HttpRequestMessage(HttpMethod.Get, $"{baseUrl}/tracks?q=Taylor%20Swift");
                 }, cancellationToken);
 
                 if (searchResponse.IsSuccessStatusCode)

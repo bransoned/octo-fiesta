@@ -436,7 +436,7 @@ public class SquidWTFMetadataService : IMusicMetadataService
 
     private async Task<List<Song>> SearchSongsTidalAsync(string query, int limit)
     {
-        var response = await SendTidalRequestAsync($"/search/?s={Uri.EscapeDataString(query)}");
+        var response = await SendTidalRequestAsync($"/tracks?q={Uri.EscapeDataString(query)}");
         
         if (response == null) return new List<Song>();
         
@@ -462,7 +462,7 @@ public class SquidWTFMetadataService : IMusicMetadataService
 
     private async Task<List<Album>> SearchAlbumsTidalAsync(string query, int limit)
     {
-        var response = await SendTidalRequestAsync($"/search/?al={Uri.EscapeDataString(query)}");
+        var response = await SendTidalRequestAsync($"/albums?q={Uri.EscapeDataString(query)}");
         
         if (response == null) return new List<Album>();
         
@@ -481,7 +481,7 @@ public class SquidWTFMetadataService : IMusicMetadataService
 
     private async Task<List<Artist>> SearchArtistsTidalAsync(string query, int limit)
     {
-        var response = await SendTidalRequestAsync($"/search/?a={Uri.EscapeDataString(query)}");
+        var response = await SendTidalRequestAsync($"/artists?q={Uri.EscapeDataString(query)}");
         
         if (response == null) return new List<Artist>();
         
@@ -496,7 +496,7 @@ public class SquidWTFMetadataService : IMusicMetadataService
 
     private async Task<List<ExternalPlaylist>> SearchPlaylistsTidalAsync(string query, int limit)
     {
-        var response = await SendTidalRequestAsync($"/search/?p={Uri.EscapeDataString(query)}");
+        var response = await SendTidalRequestAsync($"/playlists?q={Uri.EscapeDataString(query)}");
         
         if (response == null)
         {
