@@ -440,8 +440,8 @@ public class SquidWTFMetadataService : IMusicMetadataService
         
         if (response == null) return new List<Song>();
         
-        var dataResponse = JsonSerializer.Deserialize<TidalDataResponse<TidalTrack>>(response);
-        if (dataResponse?.Data?.Items == null) return new List<Song>();
+        var dataResponse = JsonSerializer.Deserialize<TidalDataWrapper<TidalTrack>>(response);
+        if (dataResponse?.Items == null) return new List<Song>();
         
         var songs = new List<Song>();
         foreach (var track in dataResponse.Data.Items.Take(limit))
