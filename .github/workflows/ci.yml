@@ -2,10 +2,10 @@ name: CI
 
 on:
   push:
-    branches: [master, dev]
+    branches: [master, dev, new-dev]
   pull_request:
     types: [opened, synchronize, reopened]
-    branches: [master, dev]
+    branches: [master, dev, new-dev]
 
 env:
   DOTNET_VERSION: "9.0.x"
