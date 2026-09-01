@@ -444,7 +444,7 @@ public class SquidWTFMetadataService : IMusicMetadataService
         if (dataResponse?.Items == null) return new List<Song>();
         
         var songs = new List<Song>();
-        foreach (var track in dataResponse.Data.Items.Take(limit))
+        foreach (var track in dataResponse.Items.Take(limit))
         {
             var song = MapTidalTrackToSong(track);
             if (ShouldIncludeSong(song))
