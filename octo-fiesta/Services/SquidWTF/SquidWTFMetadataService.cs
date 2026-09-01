@@ -21,7 +21,7 @@ public class SquidWTFMetadataService : IMusicMetadataService
     private readonly ILogger<SquidWTFMetadataService> _logger;
 
     // API endpoints
-    private const string QobuzBaseUrl = "https://qobuz.squid.wtf";
+    private const string QobuzBaseUrl = "https://arcod.xyz";
 
     // Required headers
     private const string QobuzCountryHeader = "Token-Country";

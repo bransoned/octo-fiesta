@@ -99,7 +99,7 @@ public class SquidWTFStartupValidator : BaseStartupValidator
 
     private async Task<ValidationResult> ValidateQobuzAsync(CancellationToken cancellationToken)
     {
-        var response = await _httpClient.GetAsync("https://qobuz.squid.wtf/api/get-music?q=test&offset=0", cancellationToken);
+        var response = await _httpClient.GetAsync("https://arcod.xyz/api/get-music?q=test&offset=0", cancellationToken);
 
         if (response.IsSuccessStatusCode)
         {
